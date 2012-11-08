@@ -7,20 +7,68 @@
 
 var go = go || {};
 
-var CAMERA_DISTANCE = 5;
-var CAMERA_HEIGHT = 2;
+var STATION = [ 
+    0,
+    Math.PI / 2,
+    Math.PI,
+    3 * Math.PI / 2,
+]
+
 
 go.Camera = function(fov, aspect, near, far) {
     THREE.PerspectiveCamera.call(this, fov, aspect, near, far);
+    this.position.y = go.CAMERA_HEIGHT;
     this.target = new THREE.Vector3(0,0,0);
+    this.station = 0; 
+    this.moving = null; 
     this.orbit = 0;
+
+    this.move(0);
+    this.lookAt(this.target);
 }
 
 go.Camera.prototype = Object.create( THREE.PerspectiveCamera.prototype );
 
+go.Camera.prototype.atStation = function() {
+    console.log(STATION[this.station],this.orbit);
+    if (Math.abs(STATION[this.station] - this.orbit) < go.CAMERA_SPEED ) {
+        return true;
+    };
+    return false;
+}
+
+go.Camera.prototype.shift = function(direction) {
+    if (this.atStation()) {
+        this.moving = direction;
+        if (direction == 'left') {
+            this.station = (this.station + STATION.length - 1) % STATION.length
+        } else {
+            this.station = (this.station + 1) % STATION.length
+        };
+    };
+};
+
+go.Camera.prototype.update = function() {
+    if (this.moving) {
+        if (this.moving == 'left') {
+            this.move(-go.CAMERA_SPEED);
+        } else {
+            this.move(go.CAMERA_SPEED);
+        };
+        if (this.atStation()) {
+            this.moving = null;
+        };
+    };
+};
+
 go.Camera.prototype.move = function(modOrbit) {
-    this.orbit += modOrbit;
-    this.position.x = CAMERA_DISTANCE * Math.sin( this.orbit );
-    this.position.z = CAMERA_DISTANCE * Math.cos( this.orbit );
+    this.orbit = (this.orbit + modOrbit) % (2*Math.PI);
+    if (this.orbit < 0) { this.orbit += 2*Math.PI };
+    this.position.x = go.CAMERA_DISTANCE * Math.sin( this.orbit );
+    this.position.z = go.CAMERA_DISTANCE * Math.cos( this.orbit );
     this.lookAt( this.target );
 }
+
+go.Camera.prototype.init = function() {
+    this.move(0);
+};
