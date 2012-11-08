@@ -14,6 +14,8 @@ var test_blocks = [
 BLOCK_UNIT = 1;
 PLAYER_COLOR = 0x55bbdd;
 
+MOVE_CAMERA = 'MOVE_CAMERA';
+
 
 var go = go || {};
 
@@ -50,17 +52,17 @@ go.Player = function(opts) {
     this.mesh.position.set(this.position.x * BLOCK_UNIT,
                            this.position.y * BLOCK_UNIT,
                            this.position.z * BLOCK_UNIT);
-
 };
 
 
 go.Map = function(manager, opts) {
     var opts = opts || {};
+    this.operation = null; 
     this.width = opts.width == undefined ? window.innerWidth : opts.width;
 	this.height = opts.height == undefined ? window.innerHeight : opts.height;
     this.blocks = [];
     this.scene = new THREE.Scene();
-    this.camera = new THREE.PerspectiveCamera(75, this.width/this.height, 0.1, 1000);
+    this.camera = new go.Camera(75, this.width/this.height, 0.1, 1000);
     this.camera.position.z = 8;
     this.camera.position.y = 5;
     this.camera.lookAt(new THREE.Vector3(0,0,0));
@@ -69,8 +71,11 @@ go.Map = function(manager, opts) {
     this.scene.add(this.player.mesh);
 
     manager.add("map", this.scene, this.camera, this.render, {}); 
-
 };
+
+go.Map.prototype.update = function() {
+};
+
 
 go.Map.prototype.render = function(delta, renderer) {
     renderer.render(this.scene, this.camera);
