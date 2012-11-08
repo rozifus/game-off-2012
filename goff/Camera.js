@@ -30,7 +30,6 @@ go.Camera = function(fov, aspect, near, far) {
 go.Camera.prototype = Object.create( THREE.PerspectiveCamera.prototype );
 
 go.Camera.prototype.atStation = function() {
-    console.log(STATION[this.station],this.orbit);
     if (Math.abs(STATION[this.station] - this.orbit) < go.CAMERA_SPEED ) {
         return true;
     };
