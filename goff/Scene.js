@@ -91,4 +91,14 @@ go.Map.prototype.loadBlocks = function(blocks) {
 
 };
 
+go.Map.prototype.processKeys = function(keys) {
+    if (keys.left) {
+        this.camera.move(0.05);
+    };
+    if (keys.right) {
+        this.camera.move(-0.05);
+    };
+};
+
+
 

@@ -21,6 +21,6 @@ go.Camera.prototype = Object.create( THREE.PerspectiveCamera.prototype );
 go.Camera.prototype.move = function(modOrbit) {
     this.orbit += modOrbit;
     this.position.x = CAMERA_DISTANCE * Math.sin( this.orbit );
-    this.position.y = CAMERA_DISTANCE * Math.cos( this.orbit );
+    this.position.z = CAMERA_DISTANCE * Math.cos( this.orbit );
     this.lookAt( this.target );
 }

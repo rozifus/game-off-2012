@@ -10,6 +10,7 @@
 
 var go = go || {};
 
+
 go.GameOff = function(opts)
 {
 	var self = this;
@@ -41,6 +42,9 @@ go.GameOff = function(opts)
 	this.container = opts.container || document.body;
 
 	this.gameplay = null;
+    this.mode = "map";
+
+    this.control = new go.Control(this.document);
 
     // init manager
     this.renderer = new THREE.CanvasRenderer();
@@ -54,37 +58,31 @@ go.GameOff = function(opts)
     this.map = new go.Map(this.manager);
     this.map.loadBlocks();
 
-    this.manager.renderCurrent();
-
-
-
-
 }
+
 
 go.GameOff.prototype.start = function()
 {
-this.manager.setCurrent("game");
+this.manager.setCurrent("map");
 
 	var self = this;
 
 	function raf()
 	{
 		requestAnimationFrame( raf );
-		self.update();
-	}
+        self.update();
+	};
+    raf();
 
 	//if(this.a[15] == "o")
-		raf();
 
-	this.initGameplay();
+	//this.initGameplay();
 }
 
 go.GameOff.prototype.update = function()
 {
 	if(!this.active) return;
-
-	if(this.gameplay != null)
-		this.gameplay.update();
+    this.map.processKeys(this.control.key);
 
 	this.manager.renderCurrent();
 }
@@ -97,3 +95,4 @@ go.GameOff.prototype.init = function()
 go.GameOff.prototype.initRenderer = function() {
    
 };
+
