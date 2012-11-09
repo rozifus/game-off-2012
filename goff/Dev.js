@@ -1,9 +1,9 @@
 
 var go = go || {};
 
-go.DEV = go.DEV || {};
+go.Dev = go.Dev || {};
 
-go.DEV.Grid = [
+go.Dev.BLOCKS = [
     { color: "BLUE", position: {x:0,y:0,z:0}, size: 1 },
     { color: "RED", position: {x:1,y:0,z:1}, size: 1 },
     { color: "GREEN", position: {x:-1,y:0,z:-1}, size: 1 },

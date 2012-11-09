@@ -1,42 +1,4 @@
 
-var test_blocks = [
-    { color: "BLUE", position: {x:0,y:0,z:0}, size: 1 },
-    { color: "RED", position: {x:1,y:0,z:1}, size: 1 },
-    { color: "GREEN", position: {x:-1,y:0,z:-1}, size: 1 },
-    { color: "YELLOW", position: {x:-2,y:0,z:2}, size: 1 },
-    { color: "PURPLE", position: {x:-2,y:0,z:1}, size: 1 },
-    { color: "ORANGE", position: {x:1,y:0,z:-1}, size: 1 },
-
-    { color: "WHITE", position: {x:-3,y:0,z:-3}, size: 1 },
-    { color: "WHITE", position: {x:-3,y:0,z:-2}, size: 1 },
-    { color: "WHITE", position: {x:-3,y:0,z:-1}, size: 1 },
-    { color: "WHITE", position: {x:-3,y:0,z:0}, size: 1 },
-    { color: "WHITE", position: {x:-3,y:0,z:1}, size: 1 },
-    { color: "WHITE", position: {x:-3,y:0,z:2}, size: 1 },
-    { color: "WHITE", position: {x:-3,y:0,z:3}, size: 1 },
-
-    { color: "WHITE", position: {x:3,y:0,z:-3}, size: 1 },
-    { color: "WHITE", position: {x:3,y:0,z:-2}, size: 1 },
-    { color: "WHITE", position: {x:3,y:0,z:-1}, size: 1 },
-    { color: "WHITE", position: {x:3,y:0,z:0}, size: 1 },
-    { color: "WHITE", position: {x:3,y:0,z:1}, size: 1 },
-    { color: "WHITE", position: {x:3,y:0,z:2}, size: 1 },
-    { color: "WHITE", position: {x:3,y:0,z:3}, size: 1 },
-    
-    { color: "WHITE", position: {x:-2,y:0,z:-3}, size: 1 },
-    { color: "WHITE", position: {x:-1,y:0,z:-3}, size: 1 },
-    { color: "WHITE", position: {x:0,y:0,z:-3}, size: 1 },
-    { color: "WHITE", position: {x:1,y:0,z:-3}, size: 1 },
-    { color: "WHITE", position: {x:2,y:0,z:-3}, size: 1 },
-
-    { color: "WHITE", position: {x:-2,y:0,z:3}, size: 1 },
-    { color: "WHITE", position: {x:-1,y:0,z:3}, size: 1 },
-    { color: "WHITE", position: {x:0,y:0,z:3}, size: 1 },
-    { color: "WHITE", position: {x:1,y:0,z:3}, size: 1 },
-    { color: "WHITE", position: {x:2,y:0,z:3}, size: 1 },
-
-];
-
 BLOCK_UNIT = 1;
 PLAYER_COLOR = 0x55bbdd;
 
@@ -69,7 +31,7 @@ go.Map.prototype.render = function(delta, renderer) {
 };
 
 go.Map.prototype.loadBlocks = function(blocks) {
-    var blocks = blocks || test_blocks;
+    var blocks = blocks || go.Dev.BLOCKS;
     for (var i=0; i< blocks.length; i++) {
         var newBlock = new go.Block(blocks[i]);
         this.blocks.push(newBlock);
@@ -79,6 +41,7 @@ go.Map.prototype.loadBlocks = function(blocks) {
 };
 
 go.Map.prototype.update = function() {
+    this.player.update();
     this.camera.update();
 }
 
@@ -89,6 +52,30 @@ go.Map.prototype.processKeys = function(keys) {
     if (keys.right) {
         this.camera.shift('right');
     };
+    if (keys.push) {
+        this.player.shift(go.DIRECTION[0]);
+    };
+    if (keys.pull) {
+        this.player.shift(go.DIRECTION[1]);
+    };
+    if (keys.ghost) {
+        this.player.shift(go.DIRECTION[2]);
+    };
+    if (keys.camera) {
+        this.player.shift(go.DIRECTION[3]);
+    };
+};
+
+go.Map.prototype.getBlockAt = function(position) {
+    position.x = position.x == 'undefined' ? 0 : position.x
+    position.y = position.y == 'undefined' ? 0 : position.y
+    position.z = position.z == 'undefined' ? 0 : position.z
+    for (var b=0; b<this.blocks.length; b++) {
+        if (this.blocks[b].position == position) {
+            return this.blocks[b];
+        };
+    };
+    return null;
 };
 
 
