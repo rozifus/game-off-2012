@@ -4,15 +4,8 @@
  * @license This work is licensed under the Creative Commons Attribution-NonCommercial 3.0 Unported License. 
  *          To view a copy of this license, visit http://creativecommons.org/licenses/by-nc/3.0/.
  */
-
-var test_blocks = [
-    { color: "blue", position: {x:0,y:0,z:0}, size: 1 },
-    { color: "red", position: {x:1,y:0,z:1}, size: 1 },
-    { color: "green", position: {x:-1,y:0,z:-1}, size: 1 },
-];
-
 BLOCK_UNIT = 1;
-PLAYER_COLOR = 0x55bbdd;
+PLAYER_COLOR = 0x222222 || 0x55bbdd;
 
 MOVE_CAMERA = 'MOVE_CAMERA';
 
@@ -20,9 +13,14 @@ MOVE_CAMERA = 'MOVE_CAMERA';
 var go = go || {};
 
 go.COLORS = {
-    red:    0xc31c1c,
-    green:  0x52c31c,
-    blue:   0x1c67c3,
+    RED:    0xc31c1c,
+    GREEN:  0x52c31c,
+    BLUE:   0x1c67c3,
+    ORANGE: 0xc36f1c,
+    PURPLE: 0x8f1cc3,
+    YELLOW: 0xC3be1c,
+    WHITE: 0xc0c0c0,
+    BLACK: 0x252525,
 };
 
 go.Block = function(opts) {
