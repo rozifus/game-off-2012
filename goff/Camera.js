@@ -29,6 +29,12 @@ go.Camera = function(fov, aspect, near, far) {
 
 go.Camera.prototype = Object.create( THREE.PerspectiveCamera.prototype );
 
+go.Camera.prototype.recalc = function() {
+    this.position.x = go.CAMERA_DISTANCE * Math.sin( this.orbit );
+    this.position.z = go.CAMERA_DISTANCE * Math.cos( this.orbit );
+    this.lookAt( this.target );
+};
+
 go.Camera.prototype.atStation = function() {
     if (Math.abs(STATION[this.station] - this.orbit) < go.CAMERA_SPEED ) {
         return true;
@@ -55,6 +61,8 @@ go.Camera.prototype.update = function() {
             this.move(go.CAMERA_SPEED);
         };
         if (this.atStation()) {
+            this.orbit = STATION[this.station]
+            this.recalc();
             this.moving = null;
         };
     };
@@ -63,11 +71,8 @@ go.Camera.prototype.update = function() {
 go.Camera.prototype.move = function(modOrbit) {
     this.orbit = (this.orbit + modOrbit) % (2*Math.PI);
     if (this.orbit < 0) { this.orbit += 2*Math.PI };
-    this.position.x = go.CAMERA_DISTANCE * Math.sin( this.orbit );
-    this.position.z = go.CAMERA_DISTANCE * Math.cos( this.orbit );
-    this.lookAt( this.target );
+    this.recalc();
 }
-
 go.Camera.prototype.init = function() {
     this.move(0);
 };
