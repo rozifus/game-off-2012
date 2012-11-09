@@ -7,14 +7,6 @@
 
 var go = go || {};
 
-var STATION = [ 
-    0,
-    Math.PI / 2,
-    Math.PI,
-    3 * Math.PI / 2,
-]
-
-
 go.Camera = function(fov, aspect, near, far) {
     THREE.PerspectiveCamera.call(this, fov, aspect, near, far);
     this.position.y = go.CAMERA_HEIGHT;
@@ -27,6 +19,20 @@ go.Camera = function(fov, aspect, near, far) {
     this.lookAt(this.target);
 }
 
+go.Camera.STATIONS = [ 
+    0,
+    Math.PI / 2,
+    Math.PI,
+    3 * Math.PI / 2,
+];
+
+go.STATION = [
+    {name: "EAST", rad: 0},
+    {name: "NORTH", rad: Math.PI / 2},
+    {name: "WEST", rad: Math.PI},
+    {name: "SOUTH", rad: 3 * Math.PI / 2},
+];
+
 go.Camera.prototype = Object.create( THREE.PerspectiveCamera.prototype );
 
 go.Camera.prototype.recalc = function() {
@@ -36,7 +42,7 @@ go.Camera.prototype.recalc = function() {
 };
 
 go.Camera.prototype.atStation = function() {
-    if (Math.abs(STATION[this.station] - this.orbit) < go.CAMERA_SPEED ) {
+    if (Math.abs(go.STATION[this.station].rad - this.orbit) < go.CAMERA_SPEED ) {
         return true;
     };
     return false;
@@ -46,9 +52,9 @@ go.Camera.prototype.shift = function(direction) {
     if (this.atStation()) {
         this.moving = direction;
         if (direction == 'left') {
-            this.station = (this.station + STATION.length - 1) % STATION.length
+            this.station = (this.station + go.STATION.length - 1) % go.STATION.length
         } else {
-            this.station = (this.station + 1) % STATION.length
+            this.station = (this.station + 1) % go.STATION.length
         };
     };
 };
@@ -61,7 +67,7 @@ go.Camera.prototype.update = function() {
             this.move(go.CAMERA_SPEED);
         };
         if (this.atStation()) {
-            this.orbit = STATION[this.station]
+            this.orbit = go.STATION[this.station].rad
             this.recalc();
             this.moving = null;
         };
@@ -74,5 +80,5 @@ go.Camera.prototype.move = function(modOrbit) {
     this.recalc();
 }
 go.Camera.prototype.init = function() {
-    this.move(0);
+    this.recalc();
 };
