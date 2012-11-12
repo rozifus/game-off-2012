@@ -18,14 +18,19 @@ go.Block = function(opts) {
         this.size = size;
     };
     this.moving = null;
+    this.material = null;
+    this.geometry = null;
+    this.mesh = null;
+};
+
+go.Block.prototype.build = function() {
     this.material = new THREE.MeshBasicMaterial({color: go.COLORS[this.color]});
     this.geometry = new THREE.CubeGeometry(this.size.x, this.size.y, this.size.z);
     this.mesh = new THREE.Mesh(this.geometry, this.material);
     this.mesh.position.set(this.position.x * BLOCK_UNIT,
                            this.position.y * BLOCK_UNIT,
                            this.position.z * BLOCK_UNIT);
-
-};
+}
 
 go.Block.COLORS = {
     WHITE:  {red: false, yellow: false, blue: false},

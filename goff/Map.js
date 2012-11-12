@@ -34,6 +34,7 @@ go.Map.prototype.loadBlocks = function(blocks) {
     var blocks = blocks || go.Dev.BLOCKS;
     for (var i=0; i< blocks.length; i++) {
         var newBlock = new go.Block(blocks[i]);
+        newBlock.build();
         this.blocks.push(newBlock);
         this.scene.add(newBlock.mesh);
     };
@@ -46,23 +47,32 @@ go.Map.prototype.update = function() {
 }
 
 go.Map.prototype.processKeys = function(keys) {
-    if (keys.left) {
-        this.camera.shift('left');
-    };
-    if (keys.right) {
-        this.camera.shift('right');
-    };
     if (keys.push) {
-        this.player.shift(go.DIRECTION[0]);
-    };
-    if (keys.pull) {
-        this.player.shift(go.DIRECTION[1]);
-    };
-    if (keys.ghost) {
-        this.player.shift(go.DIRECTION[2]);
-    };
-    if (keys.camera) {
-        this.player.shift(go.DIRECTION[3]);
+
+    } else if (keys.pull) {
+
+    } else if (keys.ghost) { 
+
+    } else if (keys.camera) {
+        if (keys.left) {
+            this.camera.shift('left');
+        };
+        if (keys.right) {
+            this.camera.shift('right');
+        };
+    } else {
+        if (keys.up) {
+            this.player.shift(go.DIRECTION.cameraTranslate(3, this.camera.station));
+        };
+        if (keys.right) {
+            this.player.shift(go.DIRECTION.cameraTranslate(2, this.camera.station));
+        };
+        if (keys.down) {
+            this.player.shift(go.DIRECTION.cameraTranslate(1, this.camera.station));
+        };
+        if (keys.left) {
+            this.player.shift(go.DIRECTION.cameraTranslate(0, this.camera.station));
+        };
     };
 };
 
