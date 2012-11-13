@@ -17,6 +17,7 @@ go.Map = function(manager, opts) {
     this.camera = new go.Camera(75, this.width/this.height, 0.1, 1000);
 
     this.player = new go.Player({position: {x:1, y:0, z:0}});
+    this.player.build();
     this.scene.add(this.player.mesh);
 
     manager.add("map", this.scene, this.camera, this.render, {}); 
@@ -62,21 +63,32 @@ go.Map.prototype.processKeys = function(keys) {
         };
     } else {
         if (keys.up) {
-            this.player.shift(go.DIRECTION.cameraTranslate(go.DOWN, this.camera.station));
+            this.playerMove(go.DIRECTION.cameraTranslate(go.DOWN, this.camera.station));
         };
         if (keys.right) {
-            this.player.shift(go.DIRECTION.cameraTranslate(go.LEFT, this.camera.station));
+            this.playerMove(go.DIRECTION.cameraTranslate(go.LEFT, this.camera.station));
         };
         if (keys.down) {
-            this.player.shift(go.DIRECTION.cameraTranslate(go.UP, this.camera.station));
+            this.playerMove(go.DIRECTION.cameraTranslate(go.UP, this.camera.station));
         };
         if (keys.left) {
-            this.player.shift(go.DIRECTION.cameraTranslate(go.RIGHT, this.camera.station));
+            this.playerMove(go.DIRECTION.cameraTranslate(go.RIGHT, this.camera.station));
         };
     };
 };
 
-go.Map.prototype.move = function(direction) {
+go.Map.prototype.playerMove = function(dir_obj) {
+    if (!this.getAdjacentUnit(this.player, dir_obj)) {
+        this.player.shift(dir_obj);
+    };
+};
+
+go.Map.prototype.getAdjacentUnit = function(unit, dir_obj) {
+    return this.getBlockAt(
+        { x: unit.position.x + (dir_obj.axis == 'x' ? dir_obj.sign : 0),
+          y: unit.position.y,
+          z: unit.position.z + (dir_obj.axis == 'z' ? dir_obj.sign : 0) } 
+    );
 };
 
 go.Map.prototype.getBlockAt = function(position) {
@@ -84,8 +96,9 @@ go.Map.prototype.getBlockAt = function(position) {
     position.y = position.y == 'undefined' ? 0 : position.y
     position.z = position.z == 'undefined' ? 0 : position.z
     for (var b=0; b<this.blocks.length; b++) {
-        if (this.blocks[b].position == position) {
-            return this.blocks[b];
+        if ( this.blocks[b].position.x == position.x &&
+             this.blocks[b].position.z == position.z ) { 
+            return this.blocks[b]; 
         };
     };
     return null;
