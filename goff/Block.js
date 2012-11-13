@@ -2,7 +2,6 @@ var go = go || {};
 
 go.Block = function(opts) {
     go.Unit.call(this, opts);
-    console.log(opts);
     this.color = opts.color || go.WHITE;
 };
 
@@ -15,16 +14,7 @@ go.Block.prototype.build = function() {
     this.updateMesh();
 }
 
-go.Block.COLORS = {
-    WHITE:  {red: false, yellow: false, blue: false},
-    RED:    {red: true, yellow: false, blue: false},
-    YELLOW: {red: false, yellow: true, blue: false},
-    BLUE:   {red: false, yellow: false, blue: true},
-    ORANGE: {red: true, yellow: true, blue: false},
-    PURPLE: {red: true, yellow: false, blue: true},
-    GREEN:  {red: false, yellow: true, blue: true},
-    BLACK:  {red: true, yellow: true, blue: true},
+go.Block.prototype.isPushable = function() {
+    if (go.COLOR.canPush(this.color)) { return true; };
+    return false;
 };
-
-
-

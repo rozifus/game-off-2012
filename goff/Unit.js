@@ -10,7 +10,6 @@ var go = go || {};
 
 go.Unit = function(opts) {
     this.position = opts.position;
-    this.type =  opts.type || go.Block.COLORS.WHITE;
     var size = opts.size || BLOCK_UNIT;
     if (typeof(size) == 'number') {
         this.size = {x: size, y: size, z: size};
@@ -34,6 +33,8 @@ go.Unit.prototype.updateMesh = function() {
                             this.position.y * BLOCK_UNIT,
                             this.position.z * BLOCK_UNIT );
 }
+
+go.Unit.isPushable = function() { return false; };
 
 go.Unit.prototype.update = function() {
     if (this.moving) {

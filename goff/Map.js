@@ -53,16 +53,16 @@ go.Map.prototype.update = function() {
 go.Map.prototype.processKeys = function(keys) {
     if (keys.push) {
         if (keys.up) {
-            this.playerPush(go.DIRECTION.cameraTranslate(go.DOWN, this.camera.station));
+            this.pushUnit(this.player, go.DIRECTION.cameraTranslate(go.DOWN, this.camera.station));
         };
         if (keys.right) {
-            this.playerPush(go.DIRECTION.cameraTranslate(go.LEFT, this.camera.station));
+            this.pushUnit(this.player, go.DIRECTION.cameraTranslate(go.LEFT, this.camera.station));
         };
         if (keys.down) {
-            this.playerPush(go.DIRECTION.cameraTranslate(go.UP, this.camera.station));
+            this.pushUnit(this.player, go.DIRECTION.cameraTranslate(go.UP, this.camera.station));
         };
         if (keys.left) {
-            this.playerPush(go.DIRECTION.cameraTranslate(go.RIGHT, this.camera.station));
+            this.pushUnit(this.player, go.DIRECTION.cameraTranslate(go.RIGHT, this.camera.station));
         };
     } else if (keys.pull) {
         if (keys.up) {
@@ -106,8 +106,21 @@ go.Map.prototype.playerMove = function(dir_obj) {
     };
 };
 
-go.Map.prototype.playerPush = function(dir_obj) {
-    var adjUnit = this.getAdjacentUnit(this.player, dir_obj);
+go.Map.prototype.pushUnit = function(unit, dir_obj) {
+    var adjUnit = this.getAdjacentUnit(unit, dir_obj);
+    if (!unit.isPushable()) {
+        return false;
+    };
+    if (adjUnit == null || this.pushUnit(adjUnit, dir_obj)) {
+        unit.shift(dir_obj);
+        return true;
+    } else { 
+        return false;
+    };
+};
+
+go.Map.prototype.isPushableUnit = function(unit) {
+    var adjUnit = this.getAdjacentUnit(unit, dir_obj);
     if (adjUnit != null && go.COLOR.canPush(adjUnit.color)) {
         this.player.shift(dir_obj);
         adjUnit.shift(dir_obj);

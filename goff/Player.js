@@ -15,4 +15,6 @@ go.Player.prototype.build = function() {
     this.updateMesh();
 };
 
+go.Player.prototype.isPushable = function() { return true; };
+
 
