@@ -37,17 +37,17 @@ go.Camera.prototype.atStation = function() {
 go.Camera.prototype.shift = function(direction) {
     if (this.atStation()) {
         this.moving = direction;
-        if (direction == 'left') {
-            this.station = (this.station + go.DIRECTION.length - 1) % go.DIRECTION.length
+        if (direction == go.LEFT) {
+            this.station = (this.station + go.DIRECTION.length - 1) % go.DIRECTION.length;
         } else {
-            this.station = (this.station + 1) % go.DIRECTION.length
+            this.station = (this.station + 1) % go.DIRECTION.length;
         };
     };
 };
 
 go.Camera.prototype.update = function() {
-    if (this.moving) {
-        if (this.moving == 'left') {
+    if (this.moving != null) {
+        if (this.moving == go.LEFT) {
             this.move(-go.CAMERA_SPEED);
         } else {
             this.move(go.CAMERA_SPEED);

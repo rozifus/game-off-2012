@@ -55,25 +55,28 @@ go.Map.prototype.processKeys = function(keys) {
 
     } else if (keys.camera) {
         if (keys.left) {
-            this.camera.shift('left');
+            this.camera.shift(go.LEFT);
         };
         if (keys.right) {
-            this.camera.shift('right');
+            this.camera.shift(go.RIGHT);
         };
     } else {
         if (keys.up) {
-            this.player.shift(go.DIRECTION.cameraTranslate(3, this.camera.station));
+            this.player.shift(go.DIRECTION.cameraTranslate(go.DOWN, this.camera.station));
         };
         if (keys.right) {
-            this.player.shift(go.DIRECTION.cameraTranslate(2, this.camera.station));
+            this.player.shift(go.DIRECTION.cameraTranslate(go.LEFT, this.camera.station));
         };
         if (keys.down) {
-            this.player.shift(go.DIRECTION.cameraTranslate(1, this.camera.station));
+            this.player.shift(go.DIRECTION.cameraTranslate(go.UP, this.camera.station));
         };
         if (keys.left) {
-            this.player.shift(go.DIRECTION.cameraTranslate(0, this.camera.station));
+            this.player.shift(go.DIRECTION.cameraTranslate(go.RIGHT, this.camera.station));
         };
     };
+};
+
+go.Map.prototype.move = function(direction) {
 };
 
 go.Map.prototype.getBlockAt = function(position) {

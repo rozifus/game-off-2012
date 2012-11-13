@@ -7,4 +7,9 @@ go.CAMERA_DISTANCE = 3;
 go.CAMERA_HEIGHT = 6;
 go.CAMERA_SPEED = 0.05;
 
+go.RIGHT = 0;
+go.UP = 1;
+go.LEFT = 2;
+go.DOWN = 3;
+
 
