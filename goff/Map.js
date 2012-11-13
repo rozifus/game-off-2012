@@ -45,15 +45,38 @@ go.Map.prototype.loadBlocks = function(blocks) {
 go.Map.prototype.update = function() {
     this.player.update();
     this.camera.update();
+    for (var b=0; b<this.blocks.length; b++) {
+        this.blocks[b].update();
+    }
 }
 
 go.Map.prototype.processKeys = function(keys) {
     if (keys.push) {
-
+        if (keys.up) {
+            this.playerPush(go.DIRECTION.cameraTranslate(go.DOWN, this.camera.station));
+        };
+        if (keys.right) {
+            this.playerPush(go.DIRECTION.cameraTranslate(go.LEFT, this.camera.station));
+        };
+        if (keys.down) {
+            this.playerPush(go.DIRECTION.cameraTranslate(go.UP, this.camera.station));
+        };
+        if (keys.left) {
+            this.playerPush(go.DIRECTION.cameraTranslate(go.RIGHT, this.camera.station));
+        };
     } else if (keys.pull) {
-
-    } else if (keys.ghost) { 
-
+        if (keys.up) {
+            this.playerPull(go.DIRECTION.cameraTranslate(go.DOWN, this.camera.station));
+        };
+        if (keys.right) {
+            this.playerPull(go.DIRECTION.cameraTranslate(go.LEFT, this.camera.station));
+        };
+        if (keys.down) {
+            this.playerPull(go.DIRECTION.cameraTranslate(go.UP, this.camera.station));
+        };
+        if (keys.left) {
+            this.playerPull(go.DIRECTION.cameraTranslate(go.RIGHT, this.camera.station));
+        };
     } else if (keys.camera) {
         if (keys.left) {
             this.camera.shift(go.LEFT);
@@ -80,6 +103,14 @@ go.Map.prototype.processKeys = function(keys) {
 go.Map.prototype.playerMove = function(dir_obj) {
     if (!this.getAdjacentUnit(this.player, dir_obj)) {
         this.player.shift(dir_obj);
+    };
+};
+
+go.Map.prototype.playerPush = function(dir_obj) {
+    var adjUnit = this.getAdjacentUnit(this.player, dir_obj);
+    if (adjUnit != null && go.COLOR.canPush(adjUnit.color)) {
+        this.player.shift(dir_obj);
+        adjUnit.shift(dir_obj);
     };
 };
 
