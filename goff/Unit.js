@@ -63,6 +63,14 @@ go.Unit.prototype.meshAtPosition = function() {
     return false;
 }
 
+go.Unit.prototype.ghost = function() {
+    this.material.opacity = 0.5; 
+}
+
+go.Unit.prototype.unghost = function() {
+    this.material.opacity = 1.0;
+};
+
 
 
 

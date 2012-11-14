@@ -11,9 +11,9 @@ go.Camera = function(fov, aspect, near, far) {
     THREE.PerspectiveCamera.call(this, fov, aspect, near, far);
     this.position.y = go.CAMERA_HEIGHT;
     this.target = new THREE.Vector3(0,0,0);
-    this.station = 0; 
+    this.station = go.UP; 
     this.moving = null; 
-    this.orbit = 0;
+    this.orbit = go.UP.rad;
 
     this.move(0);
     this.lookAt(this.target);
@@ -28,7 +28,7 @@ go.Camera.prototype.recalc = function() {
 };
 
 go.Camera.prototype.atStation = function() {
-    if (Math.abs(go.DIRECTION[this.station].rad - this.orbit) < go.CAMERA_SPEED ) {
+    if (Math.abs(this.station.rad - this.orbit) < go.CAMERA_SPEED ) {
         return true;
     };
     return false;
@@ -38,10 +38,11 @@ go.Camera.prototype.shift = function(direction) {
     if (this.atStation()) {
         this.moving = direction;
         if (direction == go.LEFT) {
-            this.station = (this.station + go.DIRECTION.length - 1) % go.DIRECTION.length;
+            this.station = this.station.rotate(3);
         } else {
-            this.station = (this.station + 1) % go.DIRECTION.length;
+            this.station = this.station.rotate(1);
         };
+        console.log(this.station);
     };
 };
 
@@ -53,7 +54,7 @@ go.Camera.prototype.update = function() {
             this.move(go.CAMERA_SPEED);
         };
         if (this.atStation()) {
-            this.orbit = go.DIRECTION[this.station].rad
+            this.orbit = this.station.rad
             this.recalc();
             this.moving = null;
         };
@@ -67,4 +68,8 @@ go.Camera.prototype.move = function(modOrbit) {
 }
 go.Camera.prototype.init = function() {
     this.recalc();
+};
+
+go.Camera.prototype.translate = function(direction) {
+    return direction.rotate(this.station.value);
 };

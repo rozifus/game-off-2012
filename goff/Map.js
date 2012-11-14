@@ -53,29 +53,29 @@ go.Map.prototype.update = function() {
 go.Map.prototype.processKeys = function(keys) {
     if (keys.push) {
         if (keys.up) {
-            this.pushUnit(this.player, go.DIRECTION.cameraTranslate(go.DOWN, this.camera.station));
+            this.pushUnit(this.player, this.camera.translate(go.DOWN));
         };
         if (keys.right) {
-            this.pushUnit(this.player, go.DIRECTION.cameraTranslate(go.LEFT, this.camera.station));
+            this.pushUnit(this.player, this.camera.translate(go.LEFT));
         };
         if (keys.down) {
-            this.pushUnit(this.player, go.DIRECTION.cameraTranslate(go.UP, this.camera.station));
+            this.pushUnit(this.player, this.camera.translate(go.UP));
         };
         if (keys.left) {
-            this.pushUnit(this.player, go.DIRECTION.cameraTranslate(go.RIGHT, this.camera.station));
+            this.pushUnit(this.player, this.camera.translate(go.RIGHT));
         };
     } else if (keys.pull) {
         if (keys.up) {
-            this.playerPull(go.DIRECTION.cameraTranslate(go.DOWN, this.camera.station));
+            this.pullUnit(this.player, this.camera.translate(go.DOWN));
         };
         if (keys.right) {
-            this.playerPull(go.DIRECTION.cameraTranslate(go.LEFT, this.camera.station));
+            this.pullUnit(this.player, this.camera.translate(go.LEFT));
         };
         if (keys.down) {
-            this.playerPull(go.DIRECTION.cameraTranslate(go.UP, this.camera.station));
+            this.pullUnit(this.player, this.camera.translate(go.UP));
         };
         if (keys.left) {
-            this.playerPull(go.DIRECTION.cameraTranslate(go.RIGHT, this.camera.station));
+            this.pullUnit(this.player, this.camera.translate(go.RIGHT));
         };
     } else if (keys.camera) {
         if (keys.left) {
@@ -86,52 +86,55 @@ go.Map.prototype.processKeys = function(keys) {
         };
     } else {
         if (keys.up) {
-            this.playerMove(go.DIRECTION.cameraTranslate(go.DOWN, this.camera.station));
+            this.moveUnit(this.player, this.camera.translate(go.DOWN));
         };
         if (keys.right) {
-            this.playerMove(go.DIRECTION.cameraTranslate(go.LEFT, this.camera.station));
+            this.moveUnit(this.player, this.camera.translate(go.LEFT));
         };
         if (keys.down) {
-            this.playerMove(go.DIRECTION.cameraTranslate(go.UP, this.camera.station));
+            this.moveUnit(this.player, this.camera.translate(go.UP));
         };
         if (keys.left) {
-            this.playerMove(go.DIRECTION.cameraTranslate(go.RIGHT, this.camera.station));
+            this.moveUnit(this.player, this.camera.translate(go.RIGHT));
         };
     };
 };
 
-go.Map.prototype.playerMove = function(dir_obj) {
-    if (!this.getAdjacentUnit(this.player, dir_obj)) {
-        this.player.shift(dir_obj);
+go.Map.prototype.moveUnit = function(unit, direction) {
+    if (!this.getAdjacentUnit(unit, direction)) {
+        unit.shift(direction);
+        return true;
     };
+    return false;
 };
 
-go.Map.prototype.pushUnit = function(unit, dir_obj) {
-    var adjUnit = this.getAdjacentUnit(unit, dir_obj);
+go.Map.prototype.pushUnit = function(unit, direction) {
+    var adjUnit = this.getAdjacentUnit(unit, direction);
     if (!unit.isPushable()) {
         return false;
     };
-    if (adjUnit == null || this.pushUnit(adjUnit, dir_obj)) {
-        unit.shift(dir_obj);
+    if (adjUnit == null || this.pushUnit(adjUnit, direction)) {
+        unit.shift(direction);
         return true;
     } else { 
         return false;
     };
 };
 
-go.Map.prototype.isPushableUnit = function(unit) {
-    var adjUnit = this.getAdjacentUnit(unit, dir_obj);
-    if (adjUnit != null && go.COLOR.canPush(adjUnit.color)) {
-        this.player.shift(dir_obj);
-        adjUnit.shift(dir_obj);
-    };
+go.Map.prototype.pullUnit = function(unit, direction) {
+    var adjUnit = this.getAdjacentUnit(unit, direction);
+    if (adjUnit) { return false; }
+    var revUnit = this.getAdjacentUnit(unit, direction.reverse());
+    if (!revUnit || !revUnit.isPullable()) { return false; }
+    revUnit.shift(direction);
+    unit.shift(direction);
 };
 
-go.Map.prototype.getAdjacentUnit = function(unit, dir_obj) {
+go.Map.prototype.getAdjacentUnit = function(unit, direction) {
     return this.getBlockAt(
-        { x: unit.position.x + (dir_obj.axis == 'x' ? dir_obj.sign : 0),
+        { x: unit.position.x + (direction.axis == 'x' ? direction.sign : 0),
           y: unit.position.y,
-          z: unit.position.z + (dir_obj.axis == 'z' ? dir_obj.sign : 0) } 
+          z: unit.position.z + (direction.axis == 'z' ? direction.sign : 0) } 
     );
 };
 

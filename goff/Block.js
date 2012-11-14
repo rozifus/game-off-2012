@@ -18,3 +18,13 @@ go.Block.prototype.isPushable = function() {
     if (go.COLOR.canPush(this.color)) { return true; };
     return false;
 };
+
+go.Block.prototype.isGhostable = function() {
+    if (go.COLOR.canGhost(this.color)) { return true; };
+    return false;
+};
+
+go.Block.prototype.isPullable = function() {
+    if (go.COLOR.canPull(this.color)) { return true; };
+    return false;
+};
