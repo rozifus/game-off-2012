@@ -53,16 +53,16 @@ go.Map.prototype.update = function() {
 go.Map.prototype.processKeys = function(keys) {
     if (keys.push) {
         if (keys.up) {
-            this.pushUnit(this.player, this.camera.translate(go.DOWN));
+            this.push(this.camera.translate(go.DOWN));
         };
         if (keys.right) {
-            this.pushUnit(this.player, this.camera.translate(go.LEFT));
+            this.push(this.camera.translate(go.LEFT));
         };
         if (keys.down) {
-            this.pushUnit(this.player, this.camera.translate(go.UP));
+            this.push(this.camera.translate(go.UP));
         };
         if (keys.left) {
-            this.pushUnit(this.player, this.camera.translate(go.RIGHT));
+            this.push(this.camera.translate(go.RIGHT));
         };
     } else if (keys.pull) {
         if (keys.up) {
@@ -108,15 +108,24 @@ go.Map.prototype.moveUnit = function(unit, direction) {
     return false;
 };
 
+go.Map.prototype.push = function(direction) {
+    var adjUnit = this.getAdjacentUnit(this.player, direction);
+    if (adjUnit == null) { return; }
+    if (adjUnit.color.push && this.pushUnit(adjUnit, direction)) {
+        this.player.shift(direction);
+    };
+}
+
 go.Map.prototype.pushUnit = function(unit, direction) {
     var adjUnit = this.getAdjacentUnit(unit, direction);
-    if (!unit.isPushable()) {
-        return false;
-    };
-    if (adjUnit == null || this.pushUnit(adjUnit, direction)) {
+    if (adjUnit == null) { 
         unit.shift(direction);
         return true;
-    } else { 
+    } else if (adjUnit.color.canMerge(unit.color)) {
+        console.log("Can merge");
+        return false;
+    } else {
+        console.log("can't merge");
         return false;
     };
 };

@@ -41,3 +41,5 @@ go.Dev.BLOCKS = [
 
 ];
 
+console.log('dev', go.Dev);
+

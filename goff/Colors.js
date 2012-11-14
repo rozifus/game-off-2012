@@ -1,36 +1,26 @@
 
 var go = go || {};
 
-go.COLOR = {
+go.COLOR = function(opts) {
+    this.value =  opts.value;
+    this.pull = opts.pull;
+    this.push = opts.push;
+    this.ghost = opts.ghost;
 };
 
-go.COLOR.canPush = function(color) {
-    if ( color == go.YELLOW ||
-         color == go.ORANGE ||
-         color == go.GREEN  ||
-         color == go.BLACK   ) {
-            return true;
-    }
-    return false;
+go.COLOR.prototype.canMerge = function(color) {
+    return !!( (this.pull ^ color.pull) && 
+               (this.push ^ color.push) &&
+               (this.ghost ^ color.ghost) )
 };
 
-go.COLOR.canPull = function(color) {
-    if ( color == go.RED    ||
-         color == go.ORANGE ||
-         color == go.PURPLE ||
-         color == go.BLACK   ) {
-             return  true;
-    };
-    return false;
-};
+go.WHITE    =   new go.COLOR({ value: 0xc0c0c0, pull: false, push: false, ghost: false });
+go.RED      =   new go.COLOR({ value: 0xc31c1c, pull: true,  push: false, ghost: false });
+go.YELLOW   =   new go.COLOR({ value: 0xc3be1c, pull: false, push: true,  ghost: false });
+go.BLUE     =   new go.COLOR({ value: 0x1c67c3, pull: false, push: false, ghost: true  });
+go.ORANGE   =   new go.COLOR({ value: 0xc36f1c, pull: true,  push: true,  ghost: false });
+go.GREEN    =   new go.COLOR({ value: 0x52c31c, pull: false, push: true,  ghost: true  });
+go.PURPLE   =   new go.COLOR({ value: 0x8f1cc3, pull: true,  push: false, ghost: true  });
+go.BLACK    =   new go.COLOR({ value: 0x252525, pull: true,  push: true,  ghost: true  });
 
-go.COLOR.canGhost = function(color) {
-    if (color == go.BLUE     ||
-        color == go.PURPLE   ||
-        color == go.GREEN    ||
-        color == go.BLACK     ) {
-            return true;
-    };
-    return false;
-};
 
