@@ -66,16 +66,16 @@ go.Map.prototype.processKeys = function(keys) {
         };
     } else if (keys.pull) {
         if (keys.up) {
-            this.pullUnit(this.player, this.camera.translate(go.DOWN));
+            this.pull(this.camera.translate(go.DOWN));
         };
         if (keys.right) {
-            this.pullUnit(this.player, this.camera.translate(go.LEFT));
+            this.pull(this.camera.translate(go.LEFT));
         };
         if (keys.down) {
-            this.pullUnit(this.player, this.camera.translate(go.UP));
+            this.pull(this.camera.translate(go.UP));
         };
         if (keys.left) {
-            this.pullUnit(this.player, this.camera.translate(go.RIGHT));
+            this.pull(this.camera.translate(go.RIGHT));
         };
     } else if (keys.camera) {
         if (keys.left) {
@@ -117,6 +117,7 @@ go.Map.prototype.push = function(direction) {
 }
 
 go.Map.prototype.pushUnit = function(unit, direction) {
+    if (unit.color.push == false) { return false }; 
     var adjUnit = this.getAdjacentUnit(unit, direction);
     if (adjUnit == null) { 
         unit.shift(direction);
@@ -129,6 +130,18 @@ go.Map.prototype.pushUnit = function(unit, direction) {
         return false;
     };
 };
+
+go.Map.prototype.pull = function(direction) {
+    var revUnit = this.getAdjacentUnit(this.player, direction.reverse());
+    console.log(revUnit);
+    if (revUnit == null) { return; };
+    var adjUnit = this.getAdjacentUnit(this.player, direction);
+    if (revUnit.color.pull && 
+        (adjUnit == null || this.pushUnit(adjUnit, direction)) ) {
+        this.player.shift(direction);
+        revUnit.shift(direction);
+    };
+}
 
 go.Map.prototype.pullUnit = function(unit, direction) {
     var adjUnit = this.getAdjacentUnit(unit, direction);

@@ -8,7 +8,6 @@ go.Block = function(opts) {
 go.Block.prototype = Object.create( go.Unit.prototype );
 
 go.Block.prototype.build = function() {
-    console.log(this.color);
     this.material = new THREE.MeshBasicMaterial({color: this.color.value});
     this.geometry = new THREE.CubeGeometry(this.size.x, this.size.y, this.size.z);
     this.mesh = new THREE.Mesh(this.geometry, this.material);
