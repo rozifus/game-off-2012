@@ -1,11 +1,12 @@
-go.DIR = []
+
+var go = go || {};
 
 go.Direction = function(opts) {
     this.value = opts.value;
     this.axis = opts.axis;
     this.sign = opts.sign;
     this.rad = opts.rad;
-    go.DIR.push(this);
+    if (go.DIR) { go.DIR.push(this) };
 };
 
 go.Direction.prototype.add = function(direction) {
@@ -19,6 +20,8 @@ go.Direction.prototype.rotate = function(value) {
 go.Direction.prototype.reverse = function() {
     return this.rotate(go.DIR.length / 2);
 };
+
+go.DIR = [];
 
 go.RIGHT = new go.Direction( {value: 0, axis: 'x', sign: -1, rad: 0} );
 go.UP = new go.Direction( {value: 1, axis: 'z', sign: 1, rad: Math.PI / 2} );
