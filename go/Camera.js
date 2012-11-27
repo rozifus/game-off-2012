@@ -3,7 +3,7 @@ var go = go || {};
 
 go.Camera = function(fov, aspect, near, far) {
     THREE.PerspectiveCamera.call(this, fov, aspect, near, far);
-    this.position.y = go.CAMERA_HEIGHT;
+    this.position.y = go.CAMERA_START_HEIGHT;
     this.target = new THREE.Vector3(0,0,0);
     this.station = go.UP; 
     this.moving = null; 
@@ -30,15 +30,27 @@ go.Camera.prototype.atStation = function() {
 
 go.Camera.prototype.shift = function(direction) {
     if (this.atStation()) {
-        this.moving = direction;
         if (direction == go.LEFT) {
+            this.moving = direction;
             this.station = this.station.rotate(3);
-        } else {
+        } else if (direction == go.RIGHT) {
+            this.moving = direction;
             this.station = this.station.rotate(1);
+        } else if (direction == go.UP) {
+            this.position.y = Math.min(this.position.y + go.CAMERA_SPEED,
+                                       go.CAMERA_MAX_HEIGHT);
+            this.lookAt(this.target);
+        } else if (direction == go.DOWN) {
+            this.position.y = Math.max(this.position.y - go.CAMERA_SPEED, 
+                                       go.CAMERA_MIN_HEIGHT); 
+            this.lookAt(this.target);
         };
-        console.log(this.station);
     };
 };
+
+go.Camera.prototype.Height = function(direction) {
+
+   }
 
 go.Camera.prototype.update = function() {
     if (this.moving != null) {

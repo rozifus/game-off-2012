@@ -84,6 +84,12 @@ go.Map.prototype.processKeys = function(keys) {
         if (keys.right) {
             this.camera.shift(go.RIGHT);
         };
+        if (keys.up) {
+            this.camera.shift(go.UP);
+        };
+        if (keys.down) {
+            this.camera.shift(go.DOWN);
+        };
     } else {
         if (keys.up) {
             this.moveUnit(this.player, this.camera.translate(go.DOWN));
