@@ -43,6 +43,17 @@ go.Map.prototype.loadBlocks = function(blocks) {
 };
 
 go.Map.prototype.update = function() {
+    // unghosting hacky but should work
+    
+    if (!this.player.moving) {
+        for (var b=0; b<this.blocks.length; b++) {
+            if (this.blocks[b].position.x != this.player.position.x ||
+                this.blocks[b].position.z != this.player.position.z) {
+                this.blocks[b].unghost();
+            };
+        };
+    };
+
     this.player.update();
     this.camera.update();
     for (var b=0; b<this.blocks.length; b++) {
@@ -51,6 +62,7 @@ go.Map.prototype.update = function() {
 }
 
 go.Map.prototype.processKeys = function(keys) {
+    if (this.player.moving) { return; };
     if (keys.push) {
         if (keys.up) {
             this.push(this.camera.translate(go.DOWN));
@@ -92,16 +104,16 @@ go.Map.prototype.processKeys = function(keys) {
         };
     } else {
         if (keys.up) {
-            this.moveUnit(this.player, this.camera.translate(go.DOWN));
+            this.move(this.camera.translate(go.DOWN));
         };
         if (keys.right) {
-            this.moveUnit(this.player, this.camera.translate(go.LEFT));
+            this.move(this.camera.translate(go.LEFT));
         };
         if (keys.down) {
-            this.moveUnit(this.player, this.camera.translate(go.UP));
+            this.move(this.camera.translate(go.UP));
         };
         if (keys.left) {
-            this.moveUnit(this.player, this.camera.translate(go.RIGHT));
+            this.move(this.camera.translate(go.RIGHT));
         };
     };
 };
@@ -114,10 +126,21 @@ go.Map.prototype.moveUnit = function(unit, direction) {
     return false;
 };
 
+go.Map.prototype.move = function(direction) {
+    var adjUnit = this.getAdjacentUnit(this.player, direction);
+    if (adjUnit == null) { 
+        this.player.shift(direction);
+    } else if (adjUnit.color.ghost) {
+        this.player.shift(direction);
+        adjUnit.ghost();
+    };
+};
+        
+
 go.Map.prototype.push = function(direction) {
     var adjUnit = this.getAdjacentUnit(this.player, direction);
     if (adjUnit == null) { return; }
-    if (adjUnit.color.push && this.pushUnit(adjUnit, direction)) {
+    if (this.pushUnit(adjUnit, direction)) {
         this.player.shift(direction);
     };
 }
@@ -128,24 +151,29 @@ go.Map.prototype.pushUnit = function(unit, direction) {
     if (adjUnit == null) { 
         unit.shift(direction);
         return true;
-    } else if (adjUnit.color.canMerge(unit.color)) {
-        console.log("Can merge");
-        return false;
+    } else if (unit.color.canMerge(adjUnit.color)) {
+        this.merge(unit, adjUnit, direction);
+        return true;
     } else {
-        console.log("can't merge");
         return false;
     };
 };
 
+go.Map.prototype.merge = function(moveUnit, sitUnit, direction) {
+
+};
+
 go.Map.prototype.pull = function(direction) {
     var revUnit = this.getAdjacentUnit(this.player, direction.reverse());
-    console.log(revUnit);
-    if (revUnit == null) { return; };
+    if (revUnit == null || !revUnit.color.pull) { return; };
     var adjUnit = this.getAdjacentUnit(this.player, direction);
-    if (revUnit.color.pull && 
-        (adjUnit == null || this.pushUnit(adjUnit, direction)) ) {
-        this.player.shift(direction);
+    if (adjUnit == null) {
         revUnit.shift(direction);
+        this.player.shift(direction);
+    } else if (adjUnit.color.ghost) {
+        revUnit.shift(direction);
+        this.player.shift(direction);
+        adjUnit.ghost();
     };
 }
 
@@ -159,6 +187,7 @@ go.Map.prototype.pullUnit = function(unit, direction) {
 };
 
 go.Map.prototype.getAdjacentUnit = function(unit, direction) {
+    console.log(unit, direction);
     return this.getBlockAt(
         { x: unit.position.x + (direction.axis == 'x' ? direction.sign : 0),
           y: unit.position.y,

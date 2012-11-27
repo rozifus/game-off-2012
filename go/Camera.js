@@ -36,11 +36,11 @@ go.Camera.prototype.shift = function(direction) {
         } else if (direction == go.RIGHT) {
             this.moving = direction;
             this.station = this.station.rotate(1);
-        } else if (direction == go.UP) {
+        } else if (direction == go.DOWN) {
             this.position.y = Math.min(this.position.y + go.CAMERA_SPEED,
                                        go.CAMERA_MAX_HEIGHT);
             this.lookAt(this.target);
-        } else if (direction == go.DOWN) {
+        } else if (direction == go.UP) {
             this.position.y = Math.max(this.position.y - go.CAMERA_SPEED, 
                                        go.CAMERA_MIN_HEIGHT); 
             this.lookAt(this.target);
