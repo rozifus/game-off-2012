@@ -42,18 +42,17 @@ go.Map.prototype.loadBlocks = function(blocks) {
 
 };
 
-go.Map.prototype.update = function() {
-    // unghosting hacky but should work
-    
-    if (!this.player.moving) {
-        for (var b=0; b<this.blocks.length; b++) {
-            if (this.blocks[b].position.x != this.player.position.x ||
-                this.blocks[b].position.z != this.player.position.z) {
-                this.blocks[b].unghost();
-            };
+go.Map.prototype.unghosthack = function() {
+    for (var b=0; b<this.blocks.length; b++) {
+        if (this.blocks[b].position.x != this.player.position.x ||
+            this.blocks[b].position.z != this.player.position.z) {
+            this.blocks[b].unghost();
         };
     };
+};
 
+
+go.Map.prototype.update = function() {
     this.player.update();
     this.camera.update();
     for (var b=0; b<this.blocks.length; b++) {
@@ -62,7 +61,12 @@ go.Map.prototype.update = function() {
 }
 
 go.Map.prototype.processKeys = function(keys) {
-    if (this.player.moving) { return; };
+    if (this.player.moving) { 
+        return; 
+    } else { 
+        this.unghosthack() 
+    };
+
     if (keys.push) {
         if (keys.up) {
             this.push(this.camera.translate(go.DOWN));
@@ -187,7 +191,6 @@ go.Map.prototype.pullUnit = function(unit, direction) {
 };
 
 go.Map.prototype.getAdjacentUnit = function(unit, direction) {
-    console.log(unit, direction);
     return this.getBlockAt(
         { x: unit.position.x + (direction.axis == 'x' ? direction.sign : 0),
           y: unit.position.y,
