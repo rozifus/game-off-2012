@@ -4,7 +4,7 @@ PLAYER_COLOR = 0x222222 || 0x55bbdd;
 MOVE_CAMERA = 'MOVE_CAMERA';
 
 
-PLAYER_SPEED = 0.05
+PLAYER_SPEED = 0.05;
 
 var go = go || {};
 
@@ -39,6 +39,11 @@ go.Unit.isPushable = function() { return false; };
 go.Unit.prototype.update = function() {
     if (this.moving) {
         this.mesh.position[this.moving.axis] += (this.moving.sign * PLAYER_SPEED);
+    };
+    if (this.merging) {
+        this.mesh.scale.set(this.merging.axis == 'x' ? 1.0 : this.mesh.scale.x * 0.95,
+                            this.mesh.scale.y * 0.95,
+                            this.merging.axis == 'z' ? 1.0 : this.mesh.scale.z * 0.95);
     };
     if (this.meshAtPosition()) {
         this.updateMesh();

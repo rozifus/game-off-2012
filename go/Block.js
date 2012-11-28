@@ -3,6 +3,7 @@ var go = go || {};
 go.Block = function(opts) {
     go.Unit.call(this, opts);
     this.color = opts.color || go.WHITE;
+    this.merging = null;
 };
 
 go.Block.prototype = Object.create( go.Unit.prototype );
