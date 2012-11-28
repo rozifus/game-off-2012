@@ -55,10 +55,19 @@ go.Map.prototype.unghosthack = function() {
 go.Map.prototype.update = function() {
     this.player.update();
     this.camera.update();
+    var killblocks = []
     for (var b=0; b<this.blocks.length; b++) {
         this.blocks[b].update();
-    }
-}
+        if (this.blocks[b].kill) {
+            killblocks.push(b);
+        };
+    };
+    for (var i = killblocks.length-1; i>=0; i--) {
+        var b = killblocks[i];
+        this.scene.remove(this.blocks[b].mesh);
+        this.blocks.splice(b,1);
+    };
+};
 
 go.Map.prototype.processKeys = function(keys) {
     if (this.player.moving) { 
@@ -166,8 +175,7 @@ go.Map.prototype.pushUnit = function(unit, direction) {
 go.Map.prototype.merge = function(moveUnit, sitUnit, direction) {
     moveUnit.merging = direction;
     moveUnit.shift(direction);
-    moveUnit.color.join(sitUnit.color);
-    console.log('merge');
+    sitUnit.morphColor(moveUnit.color.join(sitUnit.color));
 };
 
 go.Map.prototype.pull = function(direction) {

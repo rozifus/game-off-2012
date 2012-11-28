@@ -5,12 +5,14 @@ go.COLORS = [];
 
 
 go.Color = function(opts) {
-    this.value =  opts.value;
+    THREE.Color.call( this, opts.value );
     this.pull = opts.pull;
     this.push = opts.push;
     this.ghost = opts.ghost;
     go.COLORS.push(this);
 };
+
+go.Color.prototype = Object.create( THREE.Color.prototype );
 
 go.Color.prototype.canMerge = function(color) {
     if (color == go.WHITE) { return false; };
@@ -25,7 +27,6 @@ go.Color.prototype.join = function(color) {
     var push = this.push || color.push;
     var ghost = this.ghost || color.ghost;
 
-    console.log(go.Color.find(pull,push,ghost));
     return go.Color.find(pull,push,ghost);
 };
 

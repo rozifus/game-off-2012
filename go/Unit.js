@@ -17,6 +17,8 @@ go.Unit = function(opts) {
         this.size = size;
     };
     this.moving = null;
+    this.coloring = null;
+    this.actionClock = -1;
     this.material = null;
     this.geometry = null;
     this.mesh = null;
@@ -37,17 +39,37 @@ go.Unit.prototype.updateMesh = function() {
 go.Unit.isPushable = function() { return false; };
 
 go.Unit.prototype.update = function() {
+    this.actionClock = Math.max(-1, this.actionClock - 1);
     if (this.moving) {
         this.mesh.position[this.moving.axis] += (this.moving.sign * PLAYER_SPEED);
     };
     if (this.merging) {
-        this.mesh.scale.set(this.merging.axis == 'x' ? 1.0 : this.mesh.scale.x * 0.95,
+       ; this.mesh.scale.set(this.merging.axis == 'x' ? 1.0 : this.mesh.scale.x * 0.95,
                             this.mesh.scale.y * 0.95,
                             this.merging.axis == 'z' ? 1.0 : this.mesh.scale.z * 0.95);
     };
-    if (this.meshAtPosition()) {
-        this.updateMesh();
-        this.moving = null;
+    if (this.coloring) {
+        this.material.color.r = this.color.r * (20 - this.actionClock) / 20 +
+                            this.coloring.r * this.actionClock / 20;
+        this.material.color.g = this.color.g * (20 - this.actionClock) / 20 +
+                            this.coloring.g * this.actionClock / 20;
+        this.material.color.b = this.color.b * (20 - this.actionClock) / 20 +
+                            this.coloring.b * this.actionClock / 20;
+    };
+    if (this.actionClock == 0) {
+        this.actionClock == -1;
+        if (this.moving) { 
+            this.updateMesh() 
+            this.moving = null;
+        };
+        if (this.merging) { 
+            this.merging = null; 
+            this.kill = true;
+        };
+        if (this.coloring) { 
+            this.material.color = this.color;
+            this.coloring = null;
+        }
     };
 };
 
@@ -55,6 +77,7 @@ go.Unit.prototype.shift = function(direction) {
     if (this.meshAtPosition()) {
         this.moving = direction;
         this.position[direction.axis] += direction.sign;
+        this.actionClock = 1 / PLAYER_SPEED;
     };
 }
 
