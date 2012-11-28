@@ -5,6 +5,7 @@ go.GameOff = function(opts)
 {
 	var self = this;
     var opts = opts || {};
+    var level = opts.level || "DEFAULT";
 
 	this.document = opts.document || document;
 
@@ -38,14 +39,14 @@ go.GameOff = function(opts)
 
     // init manager
     this.renderer = new THREE.CanvasRenderer();
-    console.log(this.width, this.height);
     this.renderer.setSize( this.width, this.height );
+    this.renderer.setClearColorHex( 0xccdddd );
     //this.renderer.domElement.style.position = "relative";
     this.container.appendChild( this.renderer.domElement );
     this.manager = new bkcore.threejs.RenderManager(this.renderer);
 
     // init scene
-    this.map = new go.Map(this.manager);
+    this.map = new go.Map(this.manager, {level: level} );
     this.map.loadBlocks();
 
 }

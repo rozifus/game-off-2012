@@ -9,6 +9,8 @@ var go = go || {};
 
 go.Map = function(manager, opts) {
     var opts = opts || {};
+    var level = opts.level || "DEFAULT";
+    this.level = go.Level[level];
     this.operation = null; 
     this.width = opts.width == undefined ? window.innerWidth : opts.width;
 	this.height = opts.height == undefined ? window.innerHeight : opts.height;
@@ -16,7 +18,7 @@ go.Map = function(manager, opts) {
     this.scene = new THREE.Scene();
     this.camera = new go.Camera(75, this.width/this.height, 0.1, 1000);
 
-    this.player = new go.Player({position: {x:1, y:0, z:0}});
+    this.player = new go.Player(this.level.player);
     this.player.build();
     this.scene.add(this.player.mesh);
 
@@ -32,9 +34,20 @@ go.Map.prototype.render = function(delta, renderer) {
 };
 
 go.Map.prototype.loadBlocks = function(blocks) {
-    var blocks = blocks || go.Dev.BLOCKS;
+    var blocks = this.level.blocks;;
     for (var i=0; i< blocks.length; i++) {
-        var newBlock = new go.Block(blocks[i]);
+        var newBlock;
+        if (Object.prototype.toString.call(blocks[i]) === '[object Array]' ){
+            newBlock = new go.Block( {
+                color: blocks[i][0],
+                position: { x: blocks[i][1],
+                            y: blocks[i][2],
+                            z: blocks[i][3], },
+                size: 1
+            } );
+        } else { 
+            newBlock = new go.Block(blocks[i]);
+        };
         newBlock.build();
         this.blocks.push(newBlock);
         this.scene.add(newBlock.mesh);
@@ -143,7 +156,7 @@ go.Map.prototype.move = function(direction) {
     var adjUnit = this.getAdjacentUnit(this.player, direction);
     if (adjUnit == null) { 
         this.player.shift(direction);
-    } else if (adjUnit.color.ghost) {
+    } else if (adjUnit.color.canGhost()) {
         this.player.shift(direction);
         adjUnit.ghost();
     };
@@ -159,7 +172,7 @@ go.Map.prototype.push = function(direction) {
 }
 
 go.Map.prototype.pushUnit = function(unit, direction) {
-    if (unit.color.push == false) { return false }; 
+    if (unit.color.canPush() == false) { return false }; 
     var adjUnit = this.getAdjacentUnit(unit, direction);
     if (adjUnit == null) { 
         unit.shift(direction);
@@ -180,13 +193,13 @@ go.Map.prototype.merge = function(moveUnit, sitUnit, direction) {
 
 go.Map.prototype.pull = function(direction) {
     var revUnit = this.getAdjacentUnit(this.player, direction.reverse());
-    if (revUnit == null || !revUnit.color.pull) { return; };
+    if (revUnit == null || !revUnit.color.canPull()) { return; };
     var adjUnit = this.getAdjacentUnit(this.player, direction);
     if (adjUnit == null) {
         if (this.pullUnit(revUnit, direction)) {
             this.player.shift(direction);
         };
-    } else if (adjUnit.color.ghost) {
+    } else if (adjUnit.color.canGhost()) {
         if (this.pullUnit(revUnit, direction)) {
             this.player.shift(direction);
             adjUnit.ghost();

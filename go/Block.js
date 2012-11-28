@@ -15,16 +15,19 @@ go.Block.prototype.build = function() {
 }
 
 go.Block.prototype.isPushable = function() {
+    if (this.color == go.BLACK) { return false; };
     if (go.COLOR.canPush(this.color)) { return true; };
     return false;
 };
 
 go.Block.prototype.isGhostable = function() {
+    if (this.color == go.BLACK) { return false; };
     if (go.COLOR.canGhost(this.color)) { return true; };
     return false;
 };
 
 go.Block.prototype.isPullable = function() {
+    if (this.color == go.BLACK) { return false; };
     if (go.COLOR.canPull(this.color)) { return true; };
     return false;
 };

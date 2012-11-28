@@ -7,10 +7,14 @@
 
 var go = go || {};
 
-go.init = function() {
+go.init = function(opts) {
 
     var SCREEN_WIDTH = window.innerWidth;
     var SCREEN_HEIGHT = window.innerHeight;
+
+    if (opts) {
+        var level = opts.level || "DEFAULT";
+    }
 
     container = document.getElementById("main");
 
@@ -19,6 +23,7 @@ go.init = function() {
         width: SCREEN_WIDTH,
         height: SCREEN_HEIGHT,
         container: container,
+        level: level,
     });
 
     gameInstance.init();

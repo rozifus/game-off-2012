@@ -21,6 +21,21 @@ go.Color.prototype.canMerge = function(color) {
                (!(this.ghost && color.ghost)) )
 };
 
+go.Color.prototype.canPush = function() {
+    if (this == go.BLACK) { return false; };
+    return this.push;
+};
+
+go.Color.prototype.canPull = function() {
+    if (this == go.BLACK) { return false; };
+    return this.pull;
+};
+
+go.Color.prototype.canGhost = function() {
+    if (this == go.BLACK) { return false; };
+    return this.ghost;
+};
+
 go.Color.prototype.join = function(color) {
     if (!this.canMerge(color)) { throw Error("these blocks can't merge/join!"); };
     var pull = this.pull || color.pull;
@@ -41,7 +56,7 @@ go.Color.find = function(pull,push,ghost) {
     return null
 };
 
-go.WHITE    =   new go.Color({ value: 0xc0c0c0, pull: false, push: false, ghost: false });
+go.WHITE    =   new go.Color({ value: 0xcccccc, pull: false, push: false, ghost: false });
 go.RED      =   new go.Color({ value: 0xc31c1c, pull: true,  push: false, ghost: false });
 go.YELLOW   =   new go.Color({ value: 0xc3be1c, pull: false, push: true,  ghost: false });
 go.BLUE     =   new go.Color({ value: 0x1c67c3, pull: false, push: false, ghost: true  });
