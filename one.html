@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<title>rozifus - gameoff - 2012</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="css/fonts.css" type="text/css" charset="utf-8">
+		<style>
+			body {
+				background:#ccc;
+				padding:0;
+				margin:0;
+				overflow:hidden;
+				font-family:georgia;
+				text-align:center;
+				color: #666;
+			}
+			h1 {color: #666	; }
+			a { color:skyblue }
+			canvas { pointer-events:none; }
+			#overlay{
+				position: absolute;
+				z-index: 9999;
+				top: 0;
+				left: 0;
+				width: 100%;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="main"></div>
+
+		<script src="js/three/three.js"></script>
+		<script src="js/bkcore/RenderManager.js"></script>
+		<script src="js/bkcore/Timer.js"></script>
+		<script src="js/bkcore/ImageData.js"></script>
+        <!--<script src="js/bkcore/Util.js"></script>-->
+
+		<script src="go/GameOff.js"></script>
+		<script src="go/Color.js"></script>
+		<script src="go/Const.js"></script>
+		<script src="go/Dev.js"></script>
+		<script src="go/Unit.js"></script>
+		<script src="go/Player.js"></script>
+		<script src="go/Block.js"></script>
+		<script src="go/Control.js"></script>
+		<script src="go/Direction.js"></script>
+		<script src="go/Camera.js"></script>
+		<script src="go/Map.js"></script>
+		<script src="go/Init.js"></script>
+
+		<script src="go/Levels/DEFAULT.js"></script>
+		<script src="go/Levels/One.js"></script>
+		<script>
+            go.init({level: "One"});
+		</script>
+
+	</body>
+</html>
