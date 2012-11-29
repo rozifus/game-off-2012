@@ -41,8 +41,8 @@ go.Map.prototype.loadBlocks = function(blocks) {
             newBlock = new go.Block( {
                 color: blocks[i][0],
                 position: { x: blocks[i][1],
-                            y: blocks[i][2],
-                            z: blocks[i][3], },
+                            y: blocks[i].length == 4 ? blocks[i][2] : 0,
+                            z: blocks[i].length == 4 ? blocks[i][3] : blocks[i][2], },
                 size: 1
             } );
         } else { 
