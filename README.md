@@ -2,7 +2,7 @@
 
 A blocky game about pushing, pulling and merging (with a colorful twist).
 
-![Title](https://raw.github.com/rozifus/game-off-2012/init/img/title.png)
+![Title](https://raw.github.com/rozifus/game-off-2012/master/img/title.png)
 
 ## Contents
 
@@ -66,13 +66,13 @@ A blocky game about pushing, pulling and merging (with a colorful twist).
 
 ```Note: Depending on computer and network, levels may take 10-30 seconds to load. (But in most cases will be quicker).```
 
-### Level 1 - [(Play)](http://htmlpreview.github.com/?https://github.com/rozifus/game-off-2012/blob/init/one.html)
+### Level 1 - [(Play)](http://htmlpreview.github.com/?https://raw.github.com/rozifus/game-off-2012/master/one.html)
 
-<a href="http://htmlpreview.github.com/?https://github.com/rozifus/game-off-2012/blob/init/one.html">![Level One](https://raw.github.com/rozifus/game-off-2012/init/img/one.png)</a>
+<a href="http://htmlpreview.github.com/?https://github.com/rozifus/game-off-2012/blob/master/one.html">![Level One](https://raw.github.com/rozifus/game-off-2012/master/img/one.png)</a>
 
-### Level 2 - [(Play)](http://htmlpreview.github.com/?https://github.com/rozifus/game-off-2012/blob/init/two.html)
+### Level 2 - [(Play)](http://htmlpreview.github.com/?https://raw.github.com/rozifus/game-off-2012/master/two.html)
 
-<a href="http://htmlpreview.github.com/?https://github.com/rozifus/game-off-2012/blob/init/two.html">![Level Two](https://raw.github.com/rozifus/game-off-2012/init/img/two.png)</a>
+<a href="http://htmlpreview.github.com/?https://github.com/rozifus/game-off-2012/blob/master/two.html">![Level Two](https://raw.github.com/rozifus/game-off-2012/master/img/two.png)</a>
 
 <a name="libraries" />
 ## Libraries Used
