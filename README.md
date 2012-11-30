@@ -1,6 +1,7 @@
 ## Gitium Chromoblockatics
 
 A blocky game about pushing, pulling and merging (with a colorful twist).
+![](titleurl)
 
 ## Contents
 
@@ -18,8 +19,8 @@ A blocky game about pushing, pulling and merging (with a colorful twist).
   - Yellow - Can be pushed
   - Red - Can be pulled
   - Blue - Can be ghosted (passed through)
-  - Grey and Black - Can have no action performed on them!
-- Be careful not to trap yourself with or place the blocks into positions that you can't get them out of.
+  - Grey and Black - Can't do anything, other than get in your way!
+- Be careful not to trap yourself or place the blocks into positions that you can't get them out of.
 - If you do get stuck, you can refresh the page to reload the level :)
 
 
@@ -65,6 +66,7 @@ A blocky game about pushing, pulling and merging (with a colorful twist).
 The object of the game is to merge all
 
 ### Level 1
+![](/go/Levels/one.png)
 
 
 <a name="libraries" />
