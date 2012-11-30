@@ -24,10 +24,26 @@
 				left: 0;
 				width: 100%;
 			}
+            #winner {
+                position: absolute;
+                z-index 9999;
+                padding: auto;
+                margin-left: 40%;
+                margin-top: 40%;
+                width: 20%;
+                height: 20%; 
+                background: #fefefe;
+                border: 1px solid gray;
+                visibility: hidden;
+            }
 		</style>
 	</head>
 
 	<body>
+		<div id="winner">
+            <h2>You win!</h2>
+            <b><a href="">Level Two</a></b>
+        </div>
 		<div id="main"></div>
 
 		<script src="js/three/three.js"></script>

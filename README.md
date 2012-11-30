@@ -15,7 +15,7 @@ A blocky game about pushing, pulling and merging (with a colorful twist).
 <a name="game" />
 ## Game
 
-- The objective of the game is merge all the colored blocks together until only black blocks remain. 
+- The objective of the game is to merge all the colored blocks together until only black blocks remain. 
 - Different actions can be performed on blocks based on the hues they contain:
   - Yellow - Can be pushed
   - Red - Can be pulled
@@ -64,7 +64,7 @@ A blocky game about pushing, pulling and merging (with a colorful twist).
 <a name="play" />
 ## Play!
 
-```Note: Depending on computer and network, levels may take 10-30 seconds to load. (But in most cases will be quicker).```
+```Note: Depending on computer and network, levels may take up to 20 seconds to load. (But in most cases will be much quicker).```
 
 ### Level 1 - [(Play)](http://htmlpreview.github.com/?https://raw.github.com/rozifus/game-off-2012/master/one.html)
 

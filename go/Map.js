@@ -22,6 +22,7 @@ go.Map = function(manager, opts) {
     this.blocks = [];
     this.scene = new THREE.Scene();
     this.camera = new go.Camera(75, this.width/this.height, 0.1, 1000);
+    this.finished = false;
 
     this.player = new go.Player(this.level.player);
     this.player.build();
@@ -65,7 +66,22 @@ go.Map.prototype.unghosthack = function() {
     };
 };
 
+go.Map.prototype.allBlackBlocks = function() {
+    for (var b=0; b<this.blocks.length; b++) {
+        if ( !(this.blocks[b].color == go.BLACK) &&
+             !(this.blocks[b].color == go.WHITE) ) {
+            return false;
+        };
+    };
+    return true;
+};
+
 go.Map.prototype.update = function() {
+    if (this.finished) { return; };
+    if (this.allBlackBlocks()) {
+        this.finished = true;
+        document.getElementById("winner").style.visibility = "visible";
+    }
     this.player.update();
     this.camera.update();
     var killblocks = []
