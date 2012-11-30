@@ -66,8 +66,9 @@ A blocky game about pushing, pulling and merging (with a colorful twist).
 
 The object of the game is to merge all
 
-### Level 1
-![Level One](https://raw.github.com/rozifus/game-off-2012/init/img/one.png)
+### Level 1 [play](http://htmlpreview.github.com/?https://github.com/rozifus/game-off-2012/blob/init/one.html)
+
+![Level One](https://raw.github.com/rozifus/game-off-2012/init/img/one.png)<http://htmlpreview.github.com/?https://github.com/rozifus/game-off-2012/blob/init/one.html>
 
 
 <a name="libraries" />
