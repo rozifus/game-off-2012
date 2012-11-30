@@ -1,7 +1,8 @@
 ## Gitium Chromoblockatics
 
 A blocky game about pushing, pulling and merging (with a colorful twist).
-![](titleurl)
+
+![Title](https://raw.github.com/rozifus/game-off-2012/init/img/title.png)
 
 ## Contents
 
@@ -66,7 +67,7 @@ A blocky game about pushing, pulling and merging (with a colorful twist).
 The object of the game is to merge all
 
 ### Level 1
-![](/go/Levels/one.png)
+![Level One](https://raw.github.com/rozifus/game-off-2012/init/img/one.png)
 
 
 <a name="libraries" />
