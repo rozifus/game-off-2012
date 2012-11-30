@@ -1,3 +1,10 @@
+/*
+ * Gitium Chronoblockatics 
+ * @author Ryan Miller (rozifus) <http://www.github.com/rozifus/> 
+ * @license This work is licensed under the Creative Commons Attribution-NonCommercial 3.0 Unported License.
+ * To view a copy of this license, visit http://creativecommons.org/licenses/by-nc/3.0/.
+ */
+
 BLOCK_UNIT = 1;
 PLAYER_COLOR = 0x222222 || 0x55bbdd;
 
@@ -67,7 +74,7 @@ go.Unit.prototype.update = function() {
             this.kill = true;
         };
         if (this.coloring) { 
-            this.material.color = this.color;
+            this.material.color.setHex(this.color.getHex());
             this.coloring = null;
         }
     };

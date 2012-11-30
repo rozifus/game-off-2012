@@ -38,8 +38,15 @@ A blocky game about pushing, pulling and merging (with a colorful twist).
     <td><code>Arrow</code></td>
     <td>Blue Hued Blocks</td>
   </tr>
+  <tr>
+    <th>Move Camera</th>
+    <td><code>d</code> + <code>Arrow</code></td>
+    <td>Blue Hued Blocks</td>
+  </tr>
 
 </table>
+
+- If you get stuck, you can reload the level by refreshing the page in your browser :)
 
 
 
@@ -48,11 +55,13 @@ A blocky game about pushing, pulling and merging (with a colorful twist).
 <a name="play" />
 ## Play!
 
+### Level 1
+
+
 <a name="libraries" />
 ## Libraries Used
-* [three.js](https://github.com/mrdoob/three.js/) - The very awesome javascript game library.
-* [Three.js-extensions](https://github.com/BKcore/Three.js-extensions/) - Nifty extensions for three.js.
-
+* [Three.js](https://github.com/mrdoob/three.js/) - The very awesome javascript game library.
+* [(BKCore) Three.js-extensions](https://github.com/BKcore/Three.js-extensions/) - Nifty extensions for three.js.
 * [HexGL](https://github.com/BKcore/HexGL) - Very impressive HTML5 game. I used this as a starting point for Gitium Chromoblockatics and as a reference for how to do object oriented programming in javascript.
 
 <a name="licence" />

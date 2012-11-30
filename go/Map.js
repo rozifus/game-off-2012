@@ -1,3 +1,9 @@
+/*
+ * Gitium Chronoblockatics 
+ * @author Ryan Miller (rozifus) <http://www.github.com/rozifus/> 
+ * @license This work is licensed under the Creative Commons Attribution-NonCommercial 3.0 Unported License.
+ * To view a copy of this license, visit http://creativecommons.org/licenses/by-nc/3.0/.
+ */
 
 BLOCK_UNIT = 1;
 PLAYER_COLOR = 0x55bbdd;
@@ -216,7 +222,6 @@ go.Map.prototype.pullUnit = function(unit, direction) {
         this.merge(unit, adjUnit, direction);
         return true;
     } else {
-        console.log(unit.color.canMerge(adjUnit.color));
         return false;
     };
 };
