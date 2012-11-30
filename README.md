@@ -4,10 +4,24 @@ A blocky game about pushing, pulling and merging (with a colorful twist).
 
 ## Contents
 
+- [Game](#game)
 - [Controls](#controls)
 - [Play!](#play)
 - [Libraries Used](#libraries)
 - [Licence](#licence)
+
+<a name="game" />
+## Game
+
+- The objective of the game is merge all the colored blocks together until only black blocks remain. 
+- Different actions can be performed on blocks based on the hues they contain:
+  - Yellow - Can be pushed
+  - Red - Can be pulled
+  - Blue - Can be ghosted (passed through)
+  - Grey and Black - Can have no action performed on them!
+- Be careful not to trap yourself with or place the blocks into positions that you can't get them out of.
+- If you do get stuck, you can refresh the page to reload the level :)
+
 
 <a name="controls" />
 ## Controls
@@ -40,20 +54,15 @@ A blocky game about pushing, pulling and merging (with a colorful twist).
   </tr>
   <tr>
     <th>Move Camera</th>
-    <td><code>d</code> + <code>Arrow</code></td>
-    <td>Blue Hued Blocks</td>
+    <td><code>f</code> + <code>Arrow</code></td>
+    <td>The Whole Map</td>
   </tr>
-
 </table>
-
-- If you get stuck, you can reload the level by refreshing the page in your browser :)
-
-
-
-
 
 <a name="play" />
 ## Play!
+
+The object of the game is to merge all
 
 ### Level 1
 
