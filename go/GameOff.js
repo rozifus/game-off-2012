@@ -30,21 +30,9 @@ go.GameOff = function(opts)
 		this.height /=2;
 	}
 
-	this.settings = null;
-	this.renderer = null;
-	this.lib = null;
-	this.materials = {};
-	this.components = {};
-
 	this.container = opts.container || document.body;
-
-	this.gameplay = null;
-    this.mode = "map";
-
     this.control = new go.Control(this.document);
 
-    // init manager
-    
     this.renderer = new THREE.CanvasRenderer();
     this.renderer.setSize( this.width, this.height );
     this.renderer.setClearColorHex( 0xccdddd );
@@ -55,13 +43,11 @@ go.GameOff = function(opts)
     // init scene
     this.map = new go.Map(this.manager, {level: level} );
     this.map.loadBlocks();
-
 }
-
 
 go.GameOff.prototype.start = function()
 {
-this.manager.setCurrent("map");
+    this.manager.setCurrent("map");
 
 	var self = this;
 
@@ -71,10 +57,6 @@ this.manager.setCurrent("map");
         self.update();
 	};
     raf();
-
-	//if(this.a[15] == "o")
-
-	//this.initGameplay();
 }
 
 go.GameOff.prototype.update = function()
@@ -86,12 +68,4 @@ go.GameOff.prototype.update = function()
 	this.manager.renderCurrent();
 }
 
-go.GameOff.prototype.init = function()
-{
-
-}
-
-go.GameOff.prototype.initRenderer = function() {
-   
-};
 

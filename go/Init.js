@@ -26,8 +26,6 @@ go.init = function(opts) {
         level: level,
     });
 
-    gameInstance.init();
-
     gameInstance.start();
 };
 

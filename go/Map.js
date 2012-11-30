@@ -17,7 +17,6 @@ go.Map = function(manager, opts) {
     var opts = opts || {};
     var level = opts.level || "DEFAULT";
     this.level = go.Level[level];
-    this.operation = null; 
     this.width = opts.width == undefined ? window.innerWidth : opts.width;
 	this.height = opts.height == undefined ? window.innerHeight : opts.height;
     this.blocks = [];
@@ -30,10 +29,6 @@ go.Map = function(manager, opts) {
 
     manager.add("map", this.scene, this.camera, this.render, {}); 
 };
-
-go.Map.prototype.update = function() {
-};
-
 
 go.Map.prototype.render = function(delta, renderer) {
     renderer.render(this.scene, this.camera);
@@ -69,7 +64,6 @@ go.Map.prototype.unghosthack = function() {
         };
     };
 };
-
 
 go.Map.prototype.update = function() {
     this.player.update();
