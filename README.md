@@ -64,7 +64,7 @@ A blocky game about pushing, pulling and merging (with a colorful twist).
 <a name="play" />
 ## Play!
 
-The object of the game is to merge all
+```Note: Depending on computer and network, levels may take 10-30 seconds to load. (But in most cases will be quicker).```
 
 ### Level 1 - [(Play)](http://htmlpreview.github.com/?https://github.com/rozifus/game-off-2012/blob/init/one.html)
 
