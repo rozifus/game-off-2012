@@ -1,4 +1,5 @@
 # Gitium Chromoblockatics
+=========================
 
 A blocky game about pushing, pulling and merging (with a colorful twist).
 
@@ -7,7 +8,6 @@ A blocky game about pushing, pulling and merging (with a colorful twist).
 ## Contents
 
 - [Game](#game)
-- [Controls](#controls)
 - [Play!](#play)
 - [Libraries Used](#libraries)
 - [Music Used](#music)
@@ -23,44 +23,7 @@ A blocky game about pushing, pulling and merging (with a colorful twist).
   - Blue - Can be ghosted (passed through)
   - Grey - Can't do anything, other than get in your way!
 - Be careful not to trap yourself or place the blocks into positions that you can't get them out of.
-- If you do get stuck, you can refresh the page to reload the level :)
-
-
-<a name="controls" />
-## Controls
-
-<table>
-  <tr>
-    <th>Action</th>
-    <th>Key(s)</th>
-    <th>Acts On</th>
-  </tr>
-  <tr>
-    <th>Move</th>
-    <td><code>Arrow</code></td>
-    <td>Empty Space</td>
-  </tr>
-  <tr>
-    <th>Push</th>
-    <td><code>a</code> + <code>Arrow</code></td>
-    <td>Yellow Hued Blocks</td>
-  </tr>
-  <tr>
-    <th>Pull</th>
-    <td><code>s</code> + <code>Arrow</code></td>
-    <td>Red Hued Blocks</td>
-  </tr>
-  <tr>
-    <th>Ghost</th>
-    <td><code>Arrow</code></td>
-    <td>Blue Hued Blocks</td>
-  </tr>
-  <tr>
-    <th>Move Camera</th>
-    <td><code>f</code> + <code>Arrow</code></td>
-    <td>The Whole Map</td>
-  </tr>
-</table>
+- If you do get stuck, you can refresh the page to reload the level.
 
 <a name="play" />
 ## Play!
