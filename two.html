@@ -4,34 +4,18 @@
 		<title>rozifus - gameoff - 2012</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-		<style>
-			body {
-				background:#ccc;
-				padding:0;
-				margin:0;
-				overflow:hidden;
-				font-family:georgia;
-				text-align:center;
-				color: #666;
-			}
-			h1 {color: #666	; }
-			a { color:skyblue }
-			canvas { pointer-events:none; }
-			#overlay{
-				position: absolute;
-				z-index: 9999;
-				top: 0;
-				left: 0;
-				width: 100%;
-			}
-		</style>
+        <link rel="stylesheet" type="text/css" href="style.css" />
 	</head>
 
 	<body>
 		<div id="main"></div>
+        <div id="winner"></div>
+        <div id="controls"></div>
 
 		<script src="js/three/three.js"></script>
 		<script src="js/bkcore/RenderManager.js"></script>
+
+        <script src="overlay.js"></script>
 
 		<script src="go/GameOff.js"></script>
 		<script src="go/Color.js"></script>

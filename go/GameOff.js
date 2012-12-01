@@ -43,6 +43,7 @@ go.GameOff = function(opts)
     // init scene
     this.map = new go.Map(this.manager, {level: level} );
     this.map.loadBlocks();
+    this.renderer.setClearColorHex( this.map.level.background || 0xdddddd );
 }
 
 go.GameOff.prototype.start = function()

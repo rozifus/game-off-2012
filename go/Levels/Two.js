@@ -12,6 +12,8 @@ go.Level = go.Level || {};
 go.Level.Two = {
     title: "Level Two",
     player: { position: { x:0, y:0, z:-2 } },
+    background: 0xccddee,
+    next_url: "",
     blocks: [ 
 
         // color, down, left 
