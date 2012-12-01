@@ -8,14 +8,56 @@
 	</head>
 
 	<body>
+
+        <div id="winner">
+            <h2>You win!</h2>
+            <b><a href="http://rozifus.github.com/game-off-2012/two.html">Goto Level Two</a></b>
+        </div>
+        <div id="controls_button" />
+            <a onclick="return toggleControls()" href="#" />Controls</a>
+        </div>
+        <div id="controls_panel">
+            <table>
+              <tr>
+                <th>Action</th>
+                <th>Key(s)</th>
+                <th>Acts On</th>
+              </tr>
+              <tr>
+                <th>Move</th>
+                <td><code>Arrow</code></td>
+                <td>Empty Space</td>
+              </tr>
+              <tr>
+                <th>Push</th>
+                <td><code>a</code> + <code>Arrow</code></td>
+                <td>Yellow Hued Blocks</td>
+              </tr>
+              <tr>
+                <th>Pull</th>
+                <td><code>s</code> + <code>Arrow</code></td>
+                <td>Red Hued Blocks</td>
+              </tr>
+              <tr>
+                <th>Ghost</th>
+                <td><code>Arrow</code></td>
+                <td>Blue Hued Blocks</td>
+              </tr>
+              <tr>
+                <th>Move Camera</th>
+                <td><code>f</code> + <code>Arrow</code></td>
+                <td>The Whole Map</td>
+              </tr>
+            </table>
+            <hr />
+            <code>If you get stuck, reload the page :)</code>
+        </div>
 		<div id="main"></div>
-        <div id="winner"></div>
-        <div id="controls"></div>
+        
+        <script src="overlay.js"></script>
 
 		<script src="js/three/three.js"></script>
 		<script src="js/bkcore/RenderManager.js"></script>
-
-        <script src="overlay.js"></script>
 
 		<script src="go/GameOff.js"></script>
 		<script src="go/Color.js"></script>

@@ -80,7 +80,9 @@ go.Map.prototype.update = function() {
     if (this.finished) { return; };
     if (this.allBlackBlocks()) {
         this.finished = true;
-        document.getElementById("winner").style.visibility = "visible";
+        showWinner(this.level.win_message, 
+                   this.level.win_link_text, 
+                   this.level.win_link);
     }
     this.player.update();
     this.camera.update();
