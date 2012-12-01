@@ -48,6 +48,7 @@ go.Color.prototype.join = function(color) {
     var push = this.push || color.push;
     var ghost = this.ghost || color.ghost;
 
+    if (pull && push && ghost) { return go.WHITE; };
     return go.Color.find(pull,push,ghost);
 };
 
