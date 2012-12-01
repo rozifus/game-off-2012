@@ -5,6 +5,38 @@
  * To view a copy of this license, visit http://creativecommons.org/licenses/by-nc/3.0/.
  */
 
+musicFiles = [
+    "airtone_nightinggale_remixed.ogg",
+    "airtone_spacetime.ogg",
+    "airtone_ukeSounds.ogg",
+    "airtone_winterSunlight.ogg",
+] 
+
+nextTrack = function() {
+    if (typeof(musicTrack) == 'undefined') {
+        musicTrack = new Audio();
+        musicTrack.loop = true;
+        musicTrackIndex = Math.floor(Math.random() * musicFiles.length);
+    } else {
+        musicTrackIndex = (musicTrackIndex + 1) % musicFiles.length;
+    }; 
+    musicTrack.pause();
+    musicTrack.src = "music/" + musicFiles[musicTrackIndex];
+    musicTrack.play();
+};
+
+toggleMusic = function() {
+    if (typeof(musicTrack) == 'undefined') {
+        nextTrack();
+    } else {
+        if (musicTrack.paused) { 
+            musicTrack.play(); 
+        } else {
+            musicTrack.pause();
+        };
+    };
+};
+
 showWinner = function(message, winner_link_text, winner_link) {
     document.getElementById('winner').style.visibility = 'visible';
     document.getElementById('winner_message').innerText = message || "You Win!";

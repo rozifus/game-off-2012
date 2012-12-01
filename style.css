@@ -1,7 +1,7 @@
 body {
     background:#ccc;
-    padding:0;
-    margin:0;
+    padding:0px;
+    margin:0px;
     overflow:hidden;
     font-family:georgia;
     text-align:center;
@@ -30,7 +30,7 @@ canvas { pointer-events:none; }
 
 #controls_button {
     position: absolute;
-    z-index: 9999;
+    z-index: 10;
     padding: 5px;
     margin-left: 10px;
     margin-top: 10px;
@@ -40,12 +40,10 @@ canvas { pointer-events:none; }
 
 #controls_panel {
     position: absolute;
-    z-index: 9999;
+    z-index: 99;
     padding: 10px;
     margin-left: 10px;
-    margin-top: 50px;
-    width: auto;
-    height: auto; 
+    margin-top: 48px;
     background: #fefefe;
     border: 1px solid gray;
     visibility: hidden;

@@ -32,11 +32,14 @@ go.Control = function(domElement)
 			case 68: /*D*/self.key.ghost = true; break;
 			case 70: /*F*/self.key.camera = true; break;
 
-			case 38: /*up*/	self.key.up = true; break;
-			case 40: /*down*/self.key.down = true; break;
-			case 37: /*left*/self.key.left = true; break;
-			case 39: /*right*/self.key.right = true; break;
+			case 38: /*up*/	self.key.up = true; event.preventDefault(); break;
+			case 40: /*down*/self.key.down = true; event.preventDefault(); break;
+			case 37: /*left*/self.key.left = true; event.preventDefault(); break;
+			case 39: /*right*/self.key.right = true; event.preventDefault(); break;
 
+            case 71: toggleMusic(); break;
+            case 72: nextTrack(); break;
+            case 67: toggleControls(); break;
 		}
 	};
 
