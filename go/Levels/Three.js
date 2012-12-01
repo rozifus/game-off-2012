@@ -13,7 +13,8 @@ go.Level.Three = {
     title: "Level Three",
     player: { position: { x:-1, y:0, z:-1 } },
     background: 0xeeccdd,
-    win_url: "",
+    win_message: "Master of Gitium!",
+    win_link_text: "Back to Github",
     blocks: [ 
         // color, down, left 
         
