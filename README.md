@@ -1,4 +1,4 @@
-## Gitium Chromoblockatics
+# Gitium Chromoblockatics
 
 A blocky game about pushing, pulling and merging (with a colorful twist).
 
@@ -10,17 +10,18 @@ A blocky game about pushing, pulling and merging (with a colorful twist).
 - [Controls](#controls)
 - [Play!](#play)
 - [Libraries Used](#libraries)
+- [Music Used](#music)
 - [Licence](#licence)
 
 <a name="game" />
 ## Game
 
-- The objective of the game is to merge all the colored blocks together until only black blocks remain. 
+- The objective of the game is to merge all the colored blocks together until only grey blocks remain. 
 - Different actions can be performed on blocks based on the hues they contain:
   - Yellow - Can be pushed
   - Red - Can be pulled
   - Blue - Can be ghosted (passed through)
-  - Grey and Black - Can't do anything, other than get in your way!
+  - Grey - Can't do anything, other than get in your way!
 - Be careful not to trap yourself or place the blocks into positions that you can't get them out of.
 - If you do get stuck, you can refresh the page to reload the level :)
 
@@ -77,6 +78,10 @@ A blocky game about pushing, pulling and merging (with a colorful twist).
 * [Three.js](https://github.com/mrdoob/three.js/) - The very awesome javascript game library.
 * [(BKCore) Three.js-extensions](https://github.com/BKcore/Three.js-extensions/) - Nifty extensions for three.js.
 * [HexGL](https://github.com/BKcore/HexGL) - Very impressive HTML5 game. I used this as a starting point for Gitium Chromoblockatics and as a reference for how to do object oriented programming in javascript.
+
+<a name="music" />
+## Music Used
+All music is the work of [airtone](http://ccmixter.org/people/airtone) and licensed under Creative Commons - Attribution 3.0 Unported [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/legalcode)
 
 <a name="licence" />
 ## License

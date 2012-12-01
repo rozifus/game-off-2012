@@ -10,6 +10,8 @@ musicFiles = [
     "airtone_spacetime.ogg",
     "airtone_ukeSounds.ogg",
     "airtone_winterSunlight.ogg",
+    "airtone_h2o_instrumental.ogg",
+    "airtone_cloudy.ogg",
 ] 
 
 nextTrack = function() {
