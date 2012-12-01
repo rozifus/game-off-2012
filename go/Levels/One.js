@@ -15,6 +15,7 @@ go.Level.One = {
     win_message: "Great Work!",
     win_link: "http://rozifus.github.com/game-off-2012/two.html",
     win_link_text: "Go to Level 2",
+    background: 0xccddcc,
     blocks: [ 
         [ go.WHITE, 1,0,1 ], 
         [ go.WHITE, 1,0,2 ], 
