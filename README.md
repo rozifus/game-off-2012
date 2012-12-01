@@ -1,6 +1,6 @@
 
 Gitium Chromoblockatics
-=======================
+-----------------------
 
 A blocky game about pushing, pulling and merging (with a colorful twist).
 
