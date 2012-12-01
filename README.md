@@ -32,13 +32,19 @@ A blocky game about pushing, pulling and merging (with a colorful twist).
 
 <a href="http://rozifus.github.com/game-off-2012/simple.html">![Practice Level](http://rozifus.github.com/game-off-2012/img/simple.png)</a>
 
+<hr />
+
 ### Level One - [(Play)](http://rozifus.github.com/game-off-2012/one.html)
 
 <a href="http://rozifus.github.com/game-off-2012/one.html">![Level One](http://rozifus.github.com/game-off-2012/img/one.png)</a>
 
+<hr />
+
 ### Level Two - [(Play)](http://rozifus.github.com/game-off-2012/two.html)
 
 <a href="http://rozifus.github.com/game-off-2012/two.html">![Level Two](http://rozifus.github.com/game-off-2012/img/two.png)</a>
+
+<hr />
 
 ### Level Three - [(Play)](http://rozifus.github.com/game-off-2012/three.html)
 

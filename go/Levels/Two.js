@@ -13,7 +13,9 @@ go.Level.Two = {
     title: "Level Two",
     player: { position: { x:0, y:0, z:-2 } },
     background: 0xccddee,
-    next_url: "",
+    win_message: "Amazing!",
+    win_link: "http://rozifus.github.com/game-off-2012/three.html",
+    win_link_text: "Go to Level 3",
     blocks: [ 
 
         // color, down, left 
