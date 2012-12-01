@@ -12,6 +12,9 @@ go.Level = go.Level || {};
 go.Level.One = {
     title: "Level One",
     player: { position: { x:0, y:0, z:0 } },
+    win_message: "Great Work!",
+    win_link: "http://rozifus.github.com/game-off-2012/two.html",
+    win_link_text: "Go to Level 2",
     blocks: [ 
         [ go.WHITE, 1,0,1 ], 
         [ go.WHITE, 1,0,2 ], 

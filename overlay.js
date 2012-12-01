@@ -8,8 +8,8 @@
 showWinner = function(message, winner_link_text, winner_link) {
     document.getElementById('winner').style.visibility = 'visible';
     document.getElementById('winner_message').innerText = message || "You Win!";
-    document.getElementById('winner_link_text').innerText = winner_link_text || "Next";
-    document.getElementById('winnder_link').href = winner_link || "https://github.com/rozifus/game-off-2012";
+    document.getElementById('winner_link').innerText = winner_link_text || "Next";
+    document.getElementById('winner_link').href = winner_link || "https://github.com/rozifus/game-off-2012";
 };
 
 toggleControls = function() {
